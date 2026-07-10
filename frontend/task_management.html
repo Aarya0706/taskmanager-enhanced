@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TaskBoard — Task Management</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="page-shell">
+  <div class="topbar">
+    <div class="brand-mark"><span class="tab"></span> TaskBoard</div>
+    <div class="who">
+      <span>Signed in as <strong id="whoAmI">Admin</strong></span>
+      <a href="login.html" class="logout-link" id="logoutLink">Log out</a>
+    </div>
+  </div>
+
+  <div class="task-card">
+    <div class="header">
+      <h2>New task</h2>
+      <span class="eyebrow">Task management</span>
+    </div>
+
+    <div class="body">
+      <form id="taskForm">
+        <div class="row">
+          <label for="taskId">Task Id</label>
+          <div class="readonly-field" id="taskId">assigned automatically on submit</div>
+        </div>
+
+        <div class="grid-2">
+          <div class="row">
+            <label for="employeeName">Employee name</label>
+            <input type="text" id="employeeName" name="employeeName" placeholder="e.g. Priya Nair" required />
+          </div>
+
+          <div class="row">
+            <label for="taskTitle">Task title</label>
+            <select id="taskTitle" name="taskTitle" required>
+              <option value="" disabled selected>-- select task --</option>
+              <option value="task1">task1</option>
+              <option value="task2">task2</option>
+              <option value="task3">task3</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="completed">Completed</label>
+          <select id="completed" name="completed" required>
+            <option value="" disabled selected>-- select --</option>
+            <option value="true">true</option>
+            <option value="false">false</option>
+          </select>
+        </div>
+
+        <div class="footer">
+          <span class="status" id="statusMsg"></span>
+          <button type="submit" class="btn-submit">Save task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="task-list-card">
+    <div class="header">
+      <h2>Recent tasks</h2>
+      <span class="count" id="taskCount">0 total</span>
+    </div>
+    <div class="task-list" id="taskList">
+      <div class="empty-state">
+        <span class="glyph">&#128203;</span>
+        No tasks yet — the ones you save above will show up here.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="task.js"></script>
+</body>
+</html>

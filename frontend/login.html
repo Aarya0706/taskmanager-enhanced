@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TaskBoard — Login</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="login-shell">
+  <div class="login-brand">
+    <div class="brand-mark"><span class="tab"></span> TaskBoard</div>
+    <div class="brand-copy">
+      <h2>Every task, logged and tracked.</h2>
+      <p>Sign in to record employee tasks and mark them complete. Each entry gets its own database-generated Task Id — nothing is ever overwritten.</p>
+    </div>
+    <div class="brand-foot">Admin access only</div>
+  </div>
+
+  <div class="login-form-side">
+    <h1>Welcome back</h1>
+    <p class="subtitle">Sign in to open the task management board.</p>
+
+    <form id="loginForm">
+      <div class="field">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter username" required autocomplete="username" />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter password" required autocomplete="current-password" />
+      </div>
+
+      <button type="submit" class="btn-primary">Log in</button>
+      <p class="error-msg" id="errorMsg"></p>
+    </form>
+  </div>
+</div>
+
+<script src="login.js"></script>
+</body>
+</html>

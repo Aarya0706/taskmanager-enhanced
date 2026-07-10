@@ -1,0 +1,444 @@
+/* =====================================================================
+   TaskBoard — visual design
+   Palette: deep teal (brand/ink), warm amber (status/accent), cool
+   slate background. Display face Fraunces (ledger-style serif) pairs
+   with Manrope for UI text and JetBrains Mono for generated IDs —
+   a nod to the fact that Task Id is a real database-generated value,
+   not a placeholder.
+   ===================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap');
+
+:root {
+  --ink: #172029;
+  --ink-soft: #4b5768;
+  --muted: #8592a3;
+  --bg: #eef2f4;
+  --surface: #ffffff;
+  --line: #dfe5ea;
+  --teal: #0f6e6a;
+  --teal-deep: #0a4f4c;
+  --teal-mist: #e4f2f0;
+  --amber: #e2a13d;
+  --amber-deep: #9c6a12;
+  --amber-mist: #fbf0dc;
+  --danger: #c0432f;
+  --danger-mist: #fbe9e5;
+  --radius: 14px;
+  --shadow: 0 1px 2px rgba(23, 32, 41, 0.04), 0 10px 30px -12px rgba(15, 60, 60, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Manrope', Arial, sans-serif;
+  background:
+    radial-gradient(1100px 500px at 100% -10%, #dcebe8 0%, transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, #f2e6cf 0%, transparent 55%),
+    var(--bg);
+  min-height: 100vh;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+}
+
+h1, h2, .brand-word {
+  font-family: 'Fraunces', Georgia, serif;
+}
+
+/* ---------- Shared: pill / status ---------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .01em;
+}
+.pill.done { background: var(--teal-mist); color: var(--teal-deep); }
+.pill.pending { background: var(--amber-mist); color: var(--amber-deep); }
+.pill .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+/* =====================================================================
+   LOGIN — split panel
+   ===================================================================== */
+.login-shell {
+  width: min(880px, 100%);
+  min-height: 520px;
+  background: var(--surface);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  overflow: hidden;
+}
+
+.login-brand {
+  background: linear-gradient(165deg, var(--teal-deep) 0%, var(--teal) 62%, #157a72 100%);
+  color: #eef8f6;
+  padding: 44px 40px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.login-brand::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.10) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(200deg, rgba(0,0,0,0.9), transparent 65%);
+}
+
+.login-brand .brand-mark {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #fceccb;
+}
+
+.login-brand .brand-mark .tab {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  background: var(--amber);
+  box-shadow: 0 0 0 3px rgba(226,161,61,0.25);
+}
+
+.login-brand .brand-copy { position: relative; margin-top: 30px; }
+
+.login-brand .brand-copy h2 {
+  font-size: 30px;
+  line-height: 1.18;
+  font-weight: 600;
+  color: #ffffff;
+  max-width: 20ch;
+}
+
+.login-brand .brand-copy p {
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #cfe9e4;
+  max-width: 32ch;
+}
+
+.login-brand .brand-foot {
+  position: relative;
+  font-size: 12px;
+  color: #9fd3c9;
+  letter-spacing: .02em;
+}
+
+.login-form-side {
+  padding: 48px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-form-side h1 {
+  font-size: 25px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.login-form-side .subtitle {
+  font-size: 13.5px;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+.field { margin-bottom: 18px; }
+
+.field label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  margin-bottom: 7px;
+  letter-spacing: .01em;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 12px 13px;
+  border: 1.5px solid var(--line);
+  border-radius: 9px;
+  font-size: 14.5px;
+  font-family: inherit;
+  color: var(--ink);
+  background: #fbfcfd;
+  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.field input::placeholder { color: #a8b2bf; }
+
+.field input:focus,
+.field select:focus {
+  outline: none;
+  border-color: var(--teal);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px var(--teal-mist);
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 13px;
+  background: var(--teal-deep);
+  color: #f4fbfa;
+  border: none;
+  border-radius: 9px;
+  font-size: 14.5px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background .15s ease, transform .1s ease;
+}
+
+.btn-primary:hover { background: var(--teal); }
+.btn-primary:active { transform: translateY(1px); }
+
+.error-msg {
+  color: var(--danger);
+  font-size: 13px;
+  margin-top: 12px;
+  min-height: 16px;
+  font-weight: 600;
+}
+
+.success-msg {
+  color: var(--teal-deep);
+  font-size: 13px;
+  margin-top: 12px;
+  min-height: 16px;
+  font-weight: 600;
+}
+
+/* =====================================================================
+   TASK MANAGEMENT
+   ===================================================================== */
+.page-shell {
+  width: min(760px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topbar .brand-mark {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 19px;
+  color: var(--teal-deep);
+}
+.topbar .brand-mark .tab {
+  width: 16px; height: 16px; border-radius: 4px;
+  background: var(--amber);
+}
+
+.topbar .who {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+
+.topbar .who strong { color: var(--ink); }
+
+.logout-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  border: 1.5px solid var(--line);
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: var(--surface);
+  transition: border-color .15s ease, color .15s ease;
+}
+.logout-link:hover { border-color: var(--teal); color: var(--teal-deep); }
+
+.task-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.task-card .header {
+  padding: 22px 28px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.task-card .header h2 { font-size: 20px; font-weight: 600; color: var(--ink); }
+
+.task-card .header .eyebrow {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.task-card .body { padding: 26px 28px 22px; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.task-card .row { margin-bottom: 17px; }
+
+.task-card .row label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  margin-bottom: 7px;
+}
+
+.readonly-field {
+  padding: 11px 13px;
+  border: 1.5px dashed var(--line);
+  border-radius: 9px;
+  font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  background: #f7f9fa;
+  color: var(--muted);
+  letter-spacing: .02em;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+  padding-top: 6px;
+}
+
+.footer .status { font-size: 13px; font-weight: 600; }
+
+.btn-submit {
+  padding: 12px 26px;
+  background: var(--teal-deep);
+  color: #f4fbfa;
+  border: none;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background .15s ease, transform .1s ease;
+}
+.btn-submit:hover { background: var(--teal); }
+.btn-submit:active { transform: translateY(1px); }
+
+/* ---------- Task list ledger ---------- */
+.task-list-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.task-list-card .header {
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-list-card .header h2 { font-size: 16px; font-weight: 700; color: var(--ink); }
+.task-list-card .header .count {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.task-list { max-height: 320px; overflow-y: auto; }
+
+.task-row {
+  display: grid;
+  grid-template-columns: 64px 1fr 100px 92px;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 28px;
+  border-left: 3px solid transparent;
+  border-bottom: 1px solid #f0f2f4;
+  font-size: 13.5px;
+}
+
+.task-row:last-child { border-bottom: none; }
+.task-row.is-done { border-left-color: var(--teal); }
+.task-row.is-pending { border-left-color: var(--amber); }
+
+.task-row .tid {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+.task-row .emp { font-weight: 700; color: var(--ink); }
+.task-row .title { color: var(--ink-soft); }
+
+.empty-state {
+  padding: 34px 28px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13.5px;
+}
+.empty-state .glyph { font-size: 22px; display: block; margin-bottom: 8px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .login-shell { grid-template-columns: 1fr; }
+  .login-brand { display: none; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .task-row { grid-template-columns: 48px 1fr 80px; }
+  .task-row .status-cell { display: none; }
+}
+
+/* ---------- Accessibility ---------- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
